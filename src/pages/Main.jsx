@@ -1,87 +1,140 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Container, 
-  Grid, 
-  Typography, 
-  TextField,
-  Button,
-  Box
+import {
+  Container, Grid, Typography, TextField, Button, Box, Pagination
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Header from "../components/Header"
+import Header from "../components/Header";
+import { getBooks } from '../api/bookApi';
+import BookCard from '../components/BookCard';
 
-const dummyBooks = [
-  {
-    id: 1,
-    title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
-    author: "홍길동",
-    category: "경제",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+1",
-    createdAt: "2024-05-28T02:40:00Z"
-  },
-  {
-    id: 2,
-    title: "React 완벽 가이드",
-    author: "김철수",
-    category: "프로그래밍",
-    coverImageUrl: "",
-    createdAt: "2024-05-27T02:40:00Z"
-  },
-  {
-    id: 3,
-    title: "자바스크립트의 정석",
-    author: "이영희",
-    category: "프로그래밍",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+3",
-    createdAt: "2024-05-26T02:40:00Z"
-  }
-];
+const BOOKS_PER_PAGE = 6;
 
 function Main() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [books] = useState(dummyBooks);
+  const [books, setBooks] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredBooks = books.filter(book => 
+  useEffect(() => {
+    getBooks()
+      .then((data) => setBooks(data))
+      .catch((error) => {
+        console.error('책 목록 불러오기 실패:', error);
+        setBooks([]);
+      });
+  }, []);
+
+  const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <Container maxWidth="lg" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
-      <Header />
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
-        
-        <TextField
-          label="책 제목 검색"
-          variant="outlined"
-          size="small"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{ width: '400px' }}
-        />
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => navigate('/book/new')}
-          size="large"
-        >
-          책 등록
-        </Button>
-      </Box>
+  const totalPages = Math.ceil(filteredBooks.length / BOOKS_PER_PAGE);
+  const paginatedBooks = filteredBooks.slice(
+    (currentPage - 1) * BOOKS_PER_PAGE,
+    currentPage * BOOKS_PER_PAGE
+  );
 
-      <Grid container spacing={3} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {filteredBooks.map((book) => (
-          <Grid item xs={4} key={book.id}>
-            <BookCard 
-              book={book}
-              onClick={() => navigate(`/book/${book.id}`)}
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <Box sx={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
+      <Header />
+
+      <Container maxWidth="lg" sx={{ mt: 2 }}>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#2e3c50", textAlign: "center", mb: 4 }}>
+          전체 도서 목록
+        </Typography>
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+          <TextField
+            label="책 제목 검색"
+            variant="outlined"
+            size="small"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            sx={{ flexGrow: 1, maxWidth: '600px' }}
+          />
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => navigate('/book/new')}
+            size="medium"
+            sx={{
+              ml: 2,
+              whiteSpace: 'nowrap',
+              backgroundColor: "#007baf",
+              '&:hover': { backgroundColor: "#005f87" }
+            }}
+          >
+            책 등록
+          </Button>
+        </Box>
+
+        {/* 카드 영역 */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            minHeight: '500px',
+            backgroundColor: '#fafafa',
+            borderRadius: '8px',
+            px: 1
+          }}
+        >
+          <Box sx={{ width: '100%', maxWidth: '960px' }}>
+            {paginatedBooks.length > 0 ? (
+              <Grid container spacing={3} justifyContent="flex-start">
+                {paginatedBooks.map((book) => (
+                  <Grid item xs={4} key={book.id}>
+                    <BookCard
+                      book={book}
+                      onClick={() => navigate(`/book/${book.id}`)}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            ) : (
+              <Box
+                sx={{
+                  height: '100%',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Typography variant="body1" color="textSecondary">
+                  검색 결과가 없습니다.
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        </Box>
+
+        {totalPages > 0 && (
+          <Box display="flex" justifyContent="center" mt={4}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+              shape="rounded"
+              siblingCount={1}
+              boundaryCount={1}
             />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+          </Box>
+        )}
+      </Container>
+    </Box>
   );
 }
 
-export default Main; 
+export default Main;
