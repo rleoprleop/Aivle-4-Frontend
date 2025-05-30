@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
+import Header from "../conponents/Header"
 
 // 더미 데이터
 const dummyBook = {
@@ -32,6 +33,7 @@ function BookDetail() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
+      <Header />
       <Paper elevation={3} sx={{ p: 3, height: '100%' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
