@@ -45,11 +45,11 @@ function Main() {
       <Header />
 
       <Container sx={{ mt: 2, width: '1100px', mx: 'auto', }}>
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#2e3c50", textAlign: "center", mb: 4 }}>
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#2e3c50", textAlign: "center", mb: 6 }}>
           전체 도서 목록
         </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4, ml: 5 }}>
           <TextField
             label="책 제목 검색"
             variant="outlined"
@@ -68,6 +68,7 @@ function Main() {
             size="medium"
             sx={{
               ml: 2,
+              mr: 7,
               whiteSpace: 'nowrap',
               backgroundColor: "#007baf",
               '&:hover': { backgroundColor: "#005f87" }
@@ -84,7 +85,7 @@ function Main() {
             justifyContent: 'center',
             alignItems: 'flex-start',
             minHeight: '500px',
-            backgroundColor: '#fafafa',
+            backgroundColor: '#ffffff',
             borderRadius: '8px',
             px: 1
           }}
