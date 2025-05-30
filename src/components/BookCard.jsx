@@ -19,8 +19,7 @@ function BookCard({ book, onClick }) {
           transition: 'transform 0.2s ease-in-out'
         }
       }}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <Box sx={{ 
         position: 'relative', 
         paddingTop: '133.33%',
