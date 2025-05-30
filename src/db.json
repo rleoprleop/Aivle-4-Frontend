@@ -1,0 +1,44 @@
+{
+  "books": [
+    {
+      "id":0,
+      "title": "주린이가 가장 알고 싶은 최다질문 TOP 77",
+      "author" : "XXX",
+      "category": "경제",
+      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+1",
+      "click_count": 24
+    },
+    {
+      "id":1,
+      "title": "불편한 편의점",
+      "author" : "XXX",
+      "category": "에세이",
+      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+2",
+      "click_count": 2
+    },
+    {
+      "id":2,
+      "title": "달러구트 꿈 백화점",
+      "author" : "XXX",
+      "category": "판타지",
+      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+3",
+      "click_count": 9
+    },
+    {
+      "id":3,
+      "title": "공정하다는 착각",
+      "author" : "XXX",
+      "category": "인문",
+      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+4",
+      "click_count": 7
+    },
+    {
+      "id":4,
+      "title": "미라클모닝",
+      "author" : "XXX",
+      "category": "자기개발",
+      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+5",
+      "click_count": 5
+    }
+  ]
+}
