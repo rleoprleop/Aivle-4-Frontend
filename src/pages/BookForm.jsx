@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
+  Container,
   Paper,
   Typography,
   TextField,
@@ -12,7 +13,6 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
 import Header from "../components/Header";
-import Layout from '../components/Layout';
 
 const categories = [
   "경제", "프로그래밍", "소설", "자기계발", "역사", "과학"
@@ -22,6 +22,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = id !== undefined;
+  const [apiKey, setApiKey] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -59,7 +60,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+          "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
           prompt: `An illustrated book cover for the topic "${title}"`,
@@ -92,7 +93,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
       alert("이미지 생성에 실패했습니다.");
     }
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEdit) {
@@ -104,7 +105,8 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
   };
 
   return (
-    <Layout>
+    <Container maxWidth="md" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
+
       <Paper elevation={3} sx={{ p: 3, height: '100%' }}>
         <Typography variant="h4" gutterBottom>
           {isEdit ? '책 수정' : '책 등록'}
@@ -133,6 +135,16 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
               >
                 이미지 생성
               </Button>
+              <TextField
+                fullWidth
+                label="OpenAI API Key"
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                required
+                margin="normal"
+              />
+
             </Grid>
 
             <Grid item xs={12} md={8}>
@@ -145,31 +157,6 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
                 required
                 margin="normal"
               />
-              <TextField
-                fullWidth
-                label="저자"
-                name="author"
-                value={formData.author}
-                onChange={handleChange}
-                required
-                margin="normal"
-              />
-              <TextField
-                fullWidth
-                select
-                label="카테고리"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-                margin="normal"
-              >
-                {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </TextField>
               <TextField
                 fullWidth
                 label="설명"
@@ -200,7 +187,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
           </Box>
         </form>
       </Paper>
-    </Layout>
+    </Container>
   );
 }
 
