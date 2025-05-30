@@ -9,7 +9,7 @@ import {
   Box
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import BookCard from '../components/BookCard';
+import Header from "../conponents/Header"
 
 const dummyBooks = [
   {
@@ -49,7 +49,9 @@ function Main() {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
+      <Header />
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
+        
         <TextField
           label="책 제목 검색"
           variant="outlined"
