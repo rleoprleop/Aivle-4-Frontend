@@ -52,7 +52,7 @@ export const updateBook = async (id, bookData) => {
     const response = await api.patch(`/books/${id}`, {
       title: bookData.title,
       content: bookData.content,
-      coverImageURL: bookData.coverImageURL
+      coverImageUrl: bookData.coverImageUrl
     });
     return response.data;
   } catch (error) {
@@ -65,7 +65,6 @@ export const updateBook = async (id, bookData) => {
 export const deleteBook = async (id) => {
   try {
     await api.delete(`/books/${id}`);
-    return true;
   } catch (error) {
     console.error('책 삭제 실패:', error);
     throw error;

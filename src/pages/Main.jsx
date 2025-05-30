@@ -10,7 +10,7 @@ import BookCard from '../components/BookCard';
 
 const BOOKS_PER_PAGE = 6;
 
-function Main() {
+function Main({ books }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [books, setBooks] = useState([]);
@@ -137,5 +137,7 @@ function Main() {
     </Box>
   );
 }
+
+export default Main;
 
 export default Main;

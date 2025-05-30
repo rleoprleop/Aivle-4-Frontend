@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Container,
   Paper,
   Typography,
   TextField,
@@ -12,32 +11,18 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
-import Header from "../components/Header"
-
-// 더미 데이터
-const dummyBook = {
-  id: 1,
-  title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
-  author: "홍길동",
-  category: "경제",
-  coverImageUrl: "https://via.placeholder.com/140x140.png?text=Book+1",
-  createdAt: "2024-05-28T02:40:00Z"
-};
+import Header from "../components/Header";
+import Layout from '../components/Layout';
 
 const categories = [
-  "경제",
-  "프로그래밍",
-  "소설",
-  "자기계발",
-  "역사",
-  "과학"
+  "경제", "프로그래밍", "소설", "자기계발", "역사", "과학"
 ];
 
-function BookForm() {
+function BookForm({ books, onAddBook, onUpdateBook }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const isEdit = id !== 'new';
-  
+  const isEdit = id !== undefined;
+
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -46,12 +31,18 @@ function BookForm() {
     description: ''
   });
 
+  // 수정 모드일 경우 기존 데이터 불러오기
   useEffect(() => {
     if (isEdit) {
-      // 실제로는 API 호출로 데이터를 가져와야 함
-      setFormData(dummyBook);
+      const bookToEdit = books.find(b => b.id === Number(id));
+      if (bookToEdit) {
+        setFormData(bookToEdit);
+      } else {
+        alert("해당 도서를 찾을 수 없습니다.");
+        navigate('/main');
+      }
     }
-  }, [isEdit]);
+  }, [isEdit, id, books, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,24 +52,59 @@ function BookForm() {
     }));
   };
 
-  const handleGenerateImage = () => {
-    // 실제로는 이미지 생성 API를 호출해야 함
-    setFormData(prev => ({
-      ...prev,
-      coverImageUrl: `https://via.placeholder.com/140x140.png?text=${encodeURIComponent(prev.title)}`
-    }));
+  // ✅ OpenAI 이미지 생성 함수
+  const generateImageFromTitle = async (title) => {
+    try {
+      const response = await fetch("https://api.openai.com/v1/images/generations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          prompt: `An illustrated book cover for the topic "${title}"`,
+          n: 1,
+          size: "256x256"
+        })
+      });
+
+      const data = await response.json();
+      return data.data[0]?.url || '';
+    } catch (error) {
+      console.error("이미지 생성 실패:", error);
+      return '';
+    }
+  };
+
+  const handleGenerateImage = async () => {
+    if (!formData.title) {
+      alert("제목을 먼저 입력해주세요.");
+      return;
+    }
+
+    const imageUrl = await generateImageFromTitle(formData.title);
+    if (imageUrl) {
+      setFormData(prev => ({
+        ...prev,
+        coverImageUrl: imageUrl
+      }));
+    } else {
+      alert("이미지 생성에 실패했습니다.");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 실제로는 API 호출로 데이터를 저장해야 함
-    console.log('Form submitted:', formData);
+    if (isEdit) {
+      onUpdateBook({ ...formData, id: Number(id) });
+    } else {
+      onAddBook(formData); // App.jsx에서 id/createdAt 추가해줌
+    }
     navigate('/main');
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
-      <Header />
+    <Layout>
       <Paper elevation={3} sx={{ p: 3, height: '100%' }}>
         <Typography variant="h4" gutterBottom>
           {isEdit ? '책 수정' : '책 등록'}
@@ -174,8 +200,8 @@ function BookForm() {
           </Box>
         </form>
       </Paper>
-    </Container>
+    </Layout>
   );
 }
 
-export default BookForm; 
+export default BookForm;
