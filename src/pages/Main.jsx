@@ -44,7 +44,7 @@ function Main() {
     <Box sx={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
       <Header />
 
-      <Container maxWidth="lg" sx={{ mt: 2 }}>
+      <Container sx={{ mt: 2, width: '1100px', mx: 'auto', }}>
         <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#2e3c50", textAlign: "center", mb: 4 }}>
           전체 도서 목록
         </Typography>
@@ -89,7 +89,7 @@ function Main() {
             px: 1
           }}
         >
-          <Box sx={{ width: '100%', maxWidth: '960px' }}>
+          <Box sx={{ width: '960px', mx: 'auto' }}>
             {paginatedBooks.length > 0 ? (
               <Grid container spacing={3} justifyContent="flex-start">
                 {paginatedBooks.map((book) => (
