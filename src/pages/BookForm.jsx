@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
-import Header from "../conponents/Header"
+import Header from "../components/Header"
 
 // 더미 데이터
 const dummyBook = {

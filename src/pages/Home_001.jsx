@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import Header from "../conponents/Header"
+import Header from "../components/Header"
 import BookCard from '../components/BookCard';
 
 const dummyBooks = [
