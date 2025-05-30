@@ -10,13 +10,14 @@ import Home001 from "./pages/Home_001";
 import Main from "./pages/Main";
 import BookDetail from "./pages/BookDetail";
 import BookForm from "./pages/BookForm";
-
+import Header from "./components/Header";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home001 />} />

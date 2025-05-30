@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Container, 
   Grid, 
   Typography, 
   TextField,
@@ -9,7 +8,8 @@ import {
   Box
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Header from "../components/Header"
+import BookCard from '../components/BookCard';
+import Layout from '../components/Layout';
 
 const dummyBooks = [
   {
@@ -48,10 +48,8 @@ function Main() {
   );
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
-      <Header />
+    <Layout>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
-        
         <TextField
           label="책 제목 검색"
           variant="outlined"
@@ -69,10 +67,9 @@ function Main() {
           책 등록
         </Button>
       </Box>
-
-      <Grid container spacing={3} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <Grid container spacing={3}>
         {filteredBooks.map((book) => (
-          <Grid item xs={4} key={book.id}>
+          <Grid item xs={12} sm={6} md={4} key={book.id}>
             <BookCard 
               book={book}
               onClick={() => navigate(`/book/${book.id}`)}
@@ -80,7 +77,7 @@ function Main() {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Layout>
   );
 }
 
