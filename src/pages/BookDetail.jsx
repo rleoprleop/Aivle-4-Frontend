@@ -12,20 +12,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import Header from '../components/Header';
 
-// 더미 데이터
-const dummyBook = {
-  id: 1,
-  title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
-  author: "홍길동",
-  category: "경제",
-  coverImageUrl: "https://via.placeholder.com/140x140.png?text=Book+1",
-  createdAt: "2024-05-28T02:40:00Z"
-};
-
-function BookDetail() {
+function BookDetail({ books }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const book = dummyBook; // 실제로는 id로 책을 찾아야 함
+
+  const book = books.find((b) => String(b.id) === id);
+  if (!book) {
+    return (
+      <Container maxWidth="md" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
+        <Header />
+        <Typography variant="h6">해당 책 정보를 찾을 수 없습니다.</Typography>
+      </Container>
+    );
+  }
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('ko-KR');
@@ -89,4 +88,4 @@ function BookDetail() {
   );
 }
 
-export default BookDetail; 
+export default BookDetail;
