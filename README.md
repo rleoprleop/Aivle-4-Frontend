@@ -1,9 +1,9 @@
 # 수정 파일  
 src/  
 ├── components/  
-│    └── Header.jsx            # Title 헤더  
+│        └─ Header.jsx            # Title 헤더  
 ├── pages/  
-│    └── Home001.jsx           # Home_001  
+│        └─ Home001.jsx           # Home_001  
 ├── App.jsx
 ├── db.json                   # json-server 테스트용  
 
