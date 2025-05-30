@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
-  Container,
   Paper,
   Typography,
   TextField,
@@ -12,7 +11,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
-import Header from "../components/Header"
+import Layout from '../components/Layout';
 
 const categories = [
   "경제", "프로그래밍", "소설", "자기계발", "역사", "과학"
@@ -70,8 +69,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
-      <Header />
+    <Layout>
       <Paper elevation={3} sx={{ p: 3, height: '100%' }}>
         <Typography variant="h4" gutterBottom>
           {isEdit ? '책 수정' : '책 등록'}
@@ -167,7 +165,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
           </Box>
         </form>
       </Paper>
-    </Container>
+    </Layout>
   );
 }
 
