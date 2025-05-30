@@ -3,18 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Container, 
   Grid, 
-  Card, 
-  CardContent, 
-  CardMedia, 
   Typography, 
   TextField,
   Button,
   Box
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Header from "../conponents/Header"
+import Header from "../components/Header"
 
-// 더미 데이터
 const dummyBooks = [
   {
     id: 1,
@@ -51,10 +47,6 @@ function Main() {
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('ko-KR');
-  };
-
   return (
     <Container maxWidth="lg" sx={{ mt: 4, minHeight: 'calc(100vh - 64px)', py: 4 }}>
       <Header />
@@ -81,77 +73,10 @@ function Main() {
       <Grid container spacing={3} sx={{ maxWidth: '1200px', margin: '0 auto' }}>
         {filteredBooks.map((book) => (
           <Grid item xs={4} key={book.id}>
-            <Card 
-              sx={{ 
-                width: '100%',
-                height: '100%',
-                display: 'flex', 
-                flexDirection: 'column',
-                cursor: 'pointer',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  transition: 'transform 0.2s ease-in-out'
-                }
-              }}
+            <BookCard 
+              book={book}
               onClick={() => navigate(`/book/${book.id}`)}
-            >
-              <Box sx={{ position: 'relative', paddingTop: '133.33%' }}>
-                <CardMedia
-                  component="img"
-                  image={book.coverImageUrl || 'https://via.placeholder.com/300x400.png?text=No+Image'}
-                  alt={book.title}
-                  sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    bgcolor: 'grey.200'
-                  }}
-                />
-              </Box>
-              <CardContent sx={{ 
-                flexGrow: 0,
-                display: 'flex', 
-                flexDirection: 'column', 
-                p: 2,
-                height: '120px',
-                minHeight: '120px',
-                maxHeight: '120px'
-              }}>
-                <Box sx={{ 
-                  height: '48px',
-                  minHeight: '48px',
-                  maxHeight: '48px',
-                  overflow: 'hidden'
-                }}>
-                  <Typography 
-                    gutterBottom 
-                    variant="h6" 
-                    component="div" 
-                    sx={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
-                      lineHeight: 1.2,
-                      height: '100%'
-                    }}
-                  >
-                    {book.title}
-                  </Typography>
-                </Box>
-                <Typography 
-                  variant="body2" 
-                  color="text.secondary" 
-                  sx={{ mt: 'auto' }}
-                >
-                  등록일: {formatDate(book.createdAt)}
-                </Typography>
-              </CardContent>
-            </Card>
+            />
           </Grid>
         ))}
       </Grid>

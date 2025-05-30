@@ -1,20 +1,40 @@
 // src/pages/Home001.jsx
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Container, Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
-import Header from "../conponents/Header"
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import Header from "../components/Header"
+import BookCard from '../components/BookCard';
+
+const dummyBooks = [
+  {
+    id: 1,
+    title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
+    author: "홍길동",
+    category: "경제",
+    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+1",
+    createdAt: "2024-05-28T02:40:00Z"
+  },
+  {
+    id: 2,
+    title: "React 완벽 가이드",
+    author: "김철수",
+    category: "프로그래밍",
+    coverImageUrl: "",
+    createdAt: "2024-05-27T02:40:00Z"
+  },
+  {
+    id: 3,
+    title: "자바스크립트의 정석",
+    author: "이영희",
+    category: "프로그래밍",
+    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+3",
+    createdAt: "2024-05-26T02:40:00Z"
+  }
+];
 
 function Home001() {
-  const [books, setBooks] = useState([]);
+  const [books] = useState(dummyBooks);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // axios.get("/api/home_001?sort=click_count&limit=3")
-    axios.get("http://localhost:3001/books?_sort=-click_count&&_limit=3")
-      .then(res => setBooks(res.data))
-      .catch(err => console.error("책 데이터 가져오기 실패:", err));
-  }, []);
 
   return (
     <Box sx={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
@@ -29,54 +49,12 @@ function Home001() {
         </Typography>
 
         <Grid container spacing={6} justifyContent="center" sx={{ mt: 4 }}>
-          {books.map((book, index) => (
-            <Grid item key={index}>
-              <Card
+          {books.map((book) => (
+            <Grid item xs={4} key={book.id}>
+              <BookCard 
+                book={book}
                 onClick={() => navigate(`/book/${book.id}`)}
-                sx={{
-                  width: 240,
-                  height: 340,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  borderRadius: 3,
-                  boxShadow: 6,
-                  backgroundColor: "#ffffff",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  cursor: "pointer",
-                  '&:hover': {
-                    transform: "translateY(-6px)",
-                    boxShadow: 12
-                  }
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={book.coverImageUrl}
-                  alt={book.title}
-                  sx={{ borderRadius: 2, objectFit: "cover" }}
-                />
-                <CardContent
-                  sx={{
-                    flexGrow: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    px: 2
-                  }}
-                >
-                  <Typography variant="subtitle1" sx={{ fontWeight: 600, color: "#333", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {book.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#777", textAlign: "left", mt: 0.5 }}>
-                    {book.author}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "#888" }}>
-                    {book.category}
-                  </Typography>
-                </CardContent>
-              </Card>
+              />
             </Grid>
           ))}
         </Grid>
