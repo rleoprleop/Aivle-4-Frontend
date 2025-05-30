@@ -12,25 +12,6 @@ import BookDetail from "./pages/BookDetail";
 import BookForm from "./pages/BookForm";
 
 
-// function App() {
-//   const [message, setMessage] = useState('');
-
-//   useEffect(() => {
-//     axios.get('http://localhost:8080/api/hello')
-//       .then(res => setMessage(res.data))
-//       .catch(err => console.error(err));
-//   }, []);
-
-//   return (
-//     <div>
-//       <h1>백엔드 응답:</h1>
-//       <p>{message}</p>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
