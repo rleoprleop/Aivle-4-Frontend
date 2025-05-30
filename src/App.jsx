@@ -7,6 +7,7 @@ import axios from 'axios';
 function App() {
   const [message, setMessage] = useState('');
 
+  colsole.log("ee")
   useEffect(() => {
     axios.get('http://localhost:8080/api/hello')
       .then(res => setMessage(res.data))
