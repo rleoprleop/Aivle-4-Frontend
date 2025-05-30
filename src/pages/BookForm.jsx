@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
+import Header from "../components/Header";
 import Layout from '../components/Layout';
 
 const categories = [
@@ -51,11 +52,45 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
     }));
   };
 
-  const handleGenerateImage = () => {
-    setFormData(prev => ({
-      ...prev,
-      coverImageUrl: `https://via.placeholder.com/140x140.png?text=${encodeURIComponent(prev.title)}`
-    }));
+  // ✅ OpenAI 이미지 생성 함수
+  const generateImageFromTitle = async (title) => {
+    try {
+      const response = await fetch("https://api.openai.com/v1/images/generations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          prompt: `An illustrated book cover for the topic "${title}"`,
+          n: 1,
+          size: "256x256"
+        })
+      });
+
+      const data = await response.json();
+      return data.data[0]?.url || '';
+    } catch (error) {
+      console.error("이미지 생성 실패:", error);
+      return '';
+    }
+  };
+
+  const handleGenerateImage = async () => {
+    if (!formData.title) {
+      alert("제목을 먼저 입력해주세요.");
+      return;
+    }
+
+    const imageUrl = await generateImageFromTitle(formData.title);
+    if (imageUrl) {
+      setFormData(prev => ({
+        ...prev,
+        coverImageUrl: imageUrl
+      }));
+    } else {
+      alert("이미지 생성에 실패했습니다.");
+    }
   };
 
   const handleSubmit = (e) => {
