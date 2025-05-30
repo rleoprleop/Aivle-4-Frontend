@@ -1,0 +1,90 @@
+// src/pages/BookForm.js
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Box, Grid, TextField, Typography, Button, Paper } from '@mui/material';
+
+function BookForm({ onAddBook }) {
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [content, setContent] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    if (title.trim() === '') return;
+    onAddBook({ title, desc, content });
+    navigate('/');
+  };
+
+  const handleDelete = () => {
+    alert('삭제 기능은 아직 구현되지 않았습니다.');
+  };
+
+  return (
+    <Box sx={{ mt: 4, p: 3, backgroundColor: '#fff', borderRadius: 2, boxShadow: 1 }}>
+      <Typography variant="h5" mb={3}>책 등록하기</Typography>
+
+      <Grid container spacing={3}>
+        {/* 상단: 이미지 + 메타정보 */}
+        <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={4}>
+              <Paper sx={{ height: 180, backgroundColor: '#e0e0e0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography>생성된 이미지</Typography>
+              </Paper>
+              <Box sx={{ mt: 2 }}>
+                <Button variant="contained" fullWidth>AI로 커버 이미지 생성하기</Button>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+              <TextField
+                label="제목"
+                fullWidth
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                inputProps={{ maxLength: 20 }}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="작가 (미구현)"
+                fullWidth
+                disabled
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="요약"
+                multiline
+                rows={3}
+                fullWidth
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                inputProps={{ maxLength: 500 }}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <br></br>
+        {/* 본문 */}
+        <Grid item xs={12}>
+          <TextField
+            label="본문 내용"
+            multiline
+            rows={8}
+            fullWidth
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </Grid>
+        <br></br>
+        {/* 버튼 영역 */}
+        <Grid item xs={12} display="flex" justifyContent="space-between">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>등록</Button>
+          
+        </Grid>
+
+    </Box>
+  );
+}
+
+export default BookForm;
