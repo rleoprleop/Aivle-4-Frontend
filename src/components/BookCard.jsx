@@ -1,4 +1,5 @@
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import NoImageAvailable from '../theme/NoImageAvailable.png';
 
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('ko-KR');
@@ -28,8 +29,12 @@ function BookCard({ book, onClick }) {
       }}>
         <CardMedia
           component="img"
-          image={book.coverImageUrl || 'https://via.placeholder.com/300x400.png?text=No+Image'}
+          src={book.coverImageUrl}
           alt={book.title}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = NoImageAvailable;
+          }}
           sx={{
             position: 'absolute',
             top: 0,
