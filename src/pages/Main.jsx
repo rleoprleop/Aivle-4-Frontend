@@ -11,37 +11,9 @@ import AddIcon from '@mui/icons-material/Add';
 import BookCard from '../components/BookCard';
 import Layout from '../components/Layout';
 
-const dummyBooks = [
-  {
-    id: 1,
-    title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
-    author: "홍길동",
-    category: "경제",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+1",
-    createdAt: "2024-05-28T02:40:00Z"
-  },
-  {
-    id: 2,
-    title: "React 완벽 가이드",
-    author: "김철수",
-    category: "프로그래밍",
-    coverImageUrl: "",
-    createdAt: "2024-05-27T02:40:00Z"
-  },
-  {
-    id: 3,
-    title: "자바스크립트의 정석",
-    author: "이영희",
-    category: "프로그래밍",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+3",
-    createdAt: "2024-05-26T02:40:00Z"
-  }
-];
-
-function Main() {
+function Main({ books }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [books] = useState(dummyBooks);
 
   const filteredBooks = books.filter(book => 
     book.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -81,4 +53,4 @@ function Main() {
   );
 }
 
-export default Main; 
+export default Main;

@@ -130,4 +130,4 @@ function BookDetail() {
   );
 }
 
-export default BookDetail; 
+export default BookDetail;
