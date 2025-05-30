@@ -1,5 +1,5 @@
 # 수정 파일
-src/
+\nsrc/
 ├── components/
 │   └── Header.jsx            # Title 헤더 
 ├── pages/
