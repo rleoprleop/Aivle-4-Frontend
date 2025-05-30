@@ -140,4 +140,3 @@ function Main({ books }) {
 
 export default Main;
 
-export default Main;
