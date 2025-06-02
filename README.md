@@ -27,26 +27,9 @@ React 기반 도서 리뷰 웹 애플리케이션
   - OpenAI API 호출  
 - **스타일링**  
   - CSS & MUI 컴포넌트  
-
----
-
-## 📂 폴더 구조
-
-```
-src/
-├── api/          # API 통신 관련 모듈
-├── assets/       # 정적 자원
-├── components/   # 재사용 가능한 컴포넌트
-├── pages/        # 페이지 컴포넌트
-├── theme/        # 테마 관련 파일
-├── App.jsx       # 메인 애플리케이션 컴포넌트
-└── main.jsx      # 애플리케이션 진입점
-```
----
-
-## ⚙️ 환경 변수
-
-- `VITE_API_BASE_URL`: 백엔드 서버 주소  
-- `VITE_OPENAI_API_KEY`: OpenAI API 키  
-
+- **Backend**
+  - 언어: Java
+  - 프레임워크: Spring Boot
+  - 데이터 베이스 연동: Spring JPA
+  - 기타: Git
 ---
