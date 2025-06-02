@@ -1,94 +1,108 @@
 {
   "books": [
     {
-      "id": 0,
-      "title": "주린이가 가장 알고 싶은 최다질문 TOP 77",
-      "author": "XXX",
-      "category": "경제",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+1",
-      "click_count": 24,
-      "createdAt": "2024-05-26T02:40:00Z"
+      "id": "1",
+      "title": "프로그래머의 뇌",
+      "content": "프로그래밍 사고의 구조와 학습법을 다룬 책입니다.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+1",
+      "createdAt": "2024-01-01T10:00:00Z",
+      "updatedAt": "2024-01-01T10:00:00Z"
     },
     {
-      "id": 1,
-      "title": "불편한 편의점",
-      "author": "XXX",
-      "category": "에세이",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+2",
-      "click_count": 2,
-      "createdAt": "2024-05-26T03:40:00Z"
+      "id": "2",
+      "title": "자바스크립트 완벽 가이드",
+      "content": "모질라 개발자가 집필한 JS 바이블.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+2",
+      "createdAt": "2024-01-02T12:30:00Z",
+      "updatedAt": "2024-01-02T12:30:00Z"
     },
     {
-      "id": 2,
-      "title": "달러구트 꿈 백화점",
-      "author": "XXX",
-      "category": "판타지",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+3",
-      "click_count": 9,
-      "createdAt": "2024-05-26T04:40:00Z"
+      "id": "3",
+      "title": "리액트를 다루는 기술",
+      "content": "React 생태계를 깊이있게 다루는 개발서입니다.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+3",
+      "createdAt": "2024-01-05T08:15:00Z",
+      "updatedAt": "2024-01-05T08:15:00Z"
     },
     {
-      "id": 3,
-      "title": "공정하다는 착각",
-      "author": "XXX",
-      "category": "인문",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+4",
-      "click_count": 7,
-      "createdAt": "2024-05-26T05:40:00Z"
+      "id": "4",
+      "title": "이펙티브 자바",
+      "content": "자바 개발자를 위한 베스트 프랙티스 모음.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+4",
+      "createdAt": "2024-01-07T14:00:00Z",
+      "updatedAt": "2024-01-07T14:00:00Z"
     },
     {
-      "id": 4,
-      "title": "미라클모닝",
-      "author": "XXX",
-      "category": "자기개발",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+5",
-      "click_count": 5,
-      "createdAt": "2024-05-26T06:40:00Z"
+      "id": "5",
+      "title": "클린 코드",
+      "content": "읽기 좋은 코드의 핵심 원칙을 설명합니다.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+5",
+      "createdAt": "2024-01-09T16:45:00Z",
+      "updatedAt": "2024-01-09T16:45:00Z"
     },
     {
-      "id": 5,
-      "title": "주린이가 가장 알고 싶은 최다질문 TOP 77 1",
-      "author": "XXX",
-      "category": "경제",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+1",
-      "click_count": 24,
-      "createdAt": "2024-05-26T07:40:00Z"
+      "id": "6",
+      "title": "파이썬으로 배우는 알고리즘 트레이딩",
+      "content": "퀀트 투자자를 위한 실전 가이드.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+6",
+      "createdAt": "2024-01-10T11:00:00Z",
+      "updatedAt": "2024-01-10T11:00:00Z"
     },
     {
-      "id": 6,
-      "title": "불편한 편의점 1",
-      "author": "XXX",
-      "category": "에세이",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+2",
-      "click_count": 2,
-      "createdAt": "2024-05-26T08:40:00Z"
+      "id": "7",
+      "title": "Do it! HTML+CSS+자바스크립트 웹 표준 웹 디자인",
+      "content": "웹 기초부터 실무까지 완벽하게 배우는 책.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+7",
+      "createdAt": "2024-01-12T10:30:00Z",
+      "updatedAt": "2024-01-12T10:30:00Z"
     },
     {
-      "id": 7,
-      "title": "달러구트 꿈 백화점 1",
-      "author": "XXX",
-      "category": "판타지",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+3",
-      "click_count": 9,
-      "createdAt": "2024-05-26T09:40:00Z"
+      "id": "8",
+      "title": "모던 자바스크립트 Deep Dive",
+      "content": "자바스크립트의 핵심 개념과 동작 원리 설명.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+8",
+      "createdAt": "2024-01-14T09:00:00Z",
+      "updatedAt": "2024-01-14T09:00:00Z"
     },
     {
-      "id": 8,
-      "title": "공정하다는 착각 1",
-      "author": "XXX",
-      "category": "인문",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+4",
-      "click_count": 7,
-      "createdAt": "2024-05-26T10:40:00Z"
+      "id": "9",
+      "title": "자료구조와 함께 배우는 알고리즘",
+      "content": "기초 알고리즘 개념을 시각적으로 설명합니다.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+9",
+      "createdAt": "2024-01-15T15:00:00Z",
+      "updatedAt": "2024-01-15T15:00:00Z"
     },
     {
-      "id": 9,
-      "title": "미라클모닝 1",
-      "author": "XXX",
-      "category": "자기개발",
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+5",
-      "click_count": 5,
-      "createdAt": "2024-05-26T11:40:00Z"
+      "id": "10",
+      "title": "Git으로 배우는 버전 관리",
+      "content": "Git의 개념부터 실전까지 단계별로 설명합니다.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+10",
+      "createdAt": "2024-01-18T13:00:00Z",
+      "updatedAt": "2024-01-18T13:00:00Z"
+    },
+    {
+      "id": "11",
+      "title": "CS 전공 면접 백과",
+      "content": "컴퓨터공학 기본 지식과 면접 대비 요점 정리.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+11",
+      "createdAt": "2024-01-20T10:10:00Z",
+      "updatedAt": "2024-01-20T10:10:00Z"
+    },
+    {
+      "id": "12",
+      "title": "제로부터 시작하는 딥러닝",
+      "content": "딥러닝을 직관적으로 배우는 초보자용 입문서.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+12",
+      "createdAt": "2024-01-21T08:50:00Z",
+      "updatedAt": "2024-01-21T08:50:00Z"
+    },
+    {
+      "id": "13",
+      "title": "인공지능 시대의 코딩 교육",
+      "content": "미래 교육을 위한 코딩과 AI 개념 소개.",
+      "coverImageUrl": "https://via.placeholder.com/150x200?text=Book+13",
+      "createdAt": "2024-01-22T09:40:00Z",
+      "updatedAt": "2024-01-22T09:40:00Z"
     }
   ]
 }

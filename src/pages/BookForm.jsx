@@ -117,8 +117,8 @@ function BookForm() {
             <Grid item xs={12} md={4}>
               <Box
                 component="img"
-                src={book.coverImageUrl}
-                alt={book.title}
+                src={formData.coverImageUrl}
+                alt={formData.title}
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = NoImageAvailable;
