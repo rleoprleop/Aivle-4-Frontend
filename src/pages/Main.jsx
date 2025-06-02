@@ -99,7 +99,9 @@ function Main() {
                   alignItems: 'center'
                 }}
               >
-                <p>검색 결과가 없습니다.</p>
+                <p>{books.length === 0
+                    ? '책을 등록해 주세요!'
+                    : '검색 결과가 없습니다.'}</p>
               </Box>
             </Grid>
           )}
