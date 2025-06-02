@@ -6,34 +6,6 @@ import BookCard from '../components/BookCard';
 import Layout from '../components/Layout';
 import { getBooks } from '../api/bookApi';
 
-
-const dummyBooks = [
-  {
-    id: 1,
-    title: "주린이가 가장 알고 싶은 최다질문 TOP 77",
-    author: "홍길동",
-    category: "경제",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+1",
-    createdAt: "2024-05-28T02:40:00Z"
-  },
-  {
-    id: 2,
-    title: "React 완벽 가이드",
-    author: "김철수",
-    category: "프로그래밍",
-    coverImageUrl: "",
-    createdAt: "2024-05-27T02:40:00Z"
-  },
-  {
-    id: 3,
-    title: "자바스크립트의 정석",
-    author: "이영희",
-    category: "프로그래밍",
-    coverImageUrl: "https://via.placeholder.com/300x400.png?text=Book+3",
-    createdAt: "2024-05-26T02:40:00Z"
-  }
-];
-
 function Home001() {
   //const [books] = useState(dummyBooks);
   const [books, setBooks] = useState([]);
@@ -41,10 +13,9 @@ function Home001() {
   useEffect(() => {
     getBooks()
       .then((data) => {
-        const topBooks = data
-          .sort((a, b) => b.click_count - a.click_count)  // 내림차순 정렬
-          .slice(0, 2);                                    // 상위 3개만 추출
-        setBooks(topBooks);
+        const shuffled = [...data].sort(() => Math.random() - 0.5); // 배열 섞기
+        const randomBooks = shuffled.slice(0, 2); // 랜덤 2권 추출
+        setBooks(randomBooks);
       })
       .catch((err) => console.error("책 데이터 가져오기 실패:", err));
   }, []);
