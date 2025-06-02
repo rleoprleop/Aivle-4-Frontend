@@ -6,6 +6,7 @@ import BookCard from '../components/BookCard';
 import Layout from '../components/Layout';
 import { getBooks } from '../api/bookApi';
 
+
 const dummyBooks = [
   {
     id: 1,

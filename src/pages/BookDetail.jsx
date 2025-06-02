@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CommentIcon from '@mui/icons-material/Comment';
 import { getBook, deleteBook } from '../api/bookApi';
 import Layout from '../components/Layout';
+import NoImageAvailable from '../theme/NoImageAvailable.png';
 
 function BookDetail() {
   const { id } = useParams();
@@ -62,6 +63,10 @@ function BookDetail() {
             component="img"
             src={book.coverImageUrl}
             alt={book.title}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = NoImageAvailable;
+            }}
             sx={{
               width: 300,
               height: 400,

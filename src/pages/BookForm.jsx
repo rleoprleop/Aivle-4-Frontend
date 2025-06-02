@@ -12,6 +12,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
 import Layout from '../components/Layout';
 import { getBook, createBook, updateBook } from '../api/bookApi';
+import NoImageAvailable from '../theme/NoImageAvailable.png';
 
 function BookForm() {
   const { id } = useParams();
@@ -116,8 +117,12 @@ function BookForm() {
             <Grid item xs={12} md={4}>
               <Box
                 component="img"
-                src={formData.coverImageUrl || 'https://via.placeholder.com/140x140.png?text=No+Image'}
-                alt="Book cover"
+                src={book.coverImageUrl}
+                alt={book.title}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = NoImageAvailable;
+                }}
                 sx={{
                   width: '100%',
                   height: 'auto',
