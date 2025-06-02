@@ -37,7 +37,8 @@ export const createBook = async (bookData) => {
   try {
     const response = await api.post('/books', {
       title: bookData.title,
-      content: bookData.content
+      content: bookData.content,
+      coverImageUrl: bookData.coverImageUrl
     });
     return response.data;
   } catch (error) {
