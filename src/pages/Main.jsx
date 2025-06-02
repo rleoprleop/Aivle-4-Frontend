@@ -12,7 +12,7 @@ import BookCard from '../components/BookCard';
 import Layout from '../components/Layout';
 import { getBooks } from '../api/bookApi';
 
-const BOOKS_PER_PAGE = 6;
+const BOOKS_PER_PAGE = 8;
 
 function Main() {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ function Main() {
           paddingBottom: '40px',
         }}
       >
-        {/* 상단 검색 및 버튼 */}
+        {/* 검색창과 버튼 */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
           <TextField
             label="책 제목 검색"
@@ -78,11 +78,11 @@ function Main() {
           </Button>
         </Box>
 
-        {/* 책 카드 영역 */}
-        <Grid container spacing={3}>
+        {/* 책 목록 */}
+        <Grid container spacing={3} justifyContent="flex-start">
           {paginatedBooks.length > 0 ? (
             paginatedBooks.map((book) => (
-              <Grid item key={book.id} sx={{ width: '380px' }}>
+              <Grid item key={book.id} sx={{ width: '280px' }}>
                 <BookCard
                   book={book}
                   onClick={() => navigate(`/book/${book.id}`)}
