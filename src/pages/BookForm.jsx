@@ -1,48 +1,45 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   Paper,
   Typography,
   TextField,
   Button,
   Box,
-  Grid,
-  MenuItem
+  Grid
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ImageIcon from '@mui/icons-material/Image';
-import Header from "../components/Header";
 import Layout from '../components/Layout';
+import { getBook, createBook, updateBook } from '../api/bookApi';
 
-const categories = [
-  "경제", "프로그래밍", "소설", "자기계발", "역사", "과학"
-];
-
-function BookForm({ books, onAddBook, onUpdateBook }) {
+function BookForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const isEdit = id !== undefined;
+  const location = useLocation();
+  const isEdit = location.pathname.includes('/edit/');
 
   const [formData, setFormData] = useState({
     title: '',
-    author: '',
-    category: '',
     coverImageUrl: '',
-    description: ''
+    content: ''
   });
 
   // 수정 모드일 경우 기존 데이터 불러오기
   useEffect(() => {
-    if (isEdit) {
-      const bookToEdit = books.find(b => b.id === Number(id));
-      if (bookToEdit) {
-        setFormData(bookToEdit);
-      } else {
-        alert("해당 도서를 찾을 수 없습니다.");
-        navigate('/main');
+    const fetchBook = async () => {
+      if (isEdit && id) {
+        try {
+          const bookData = await getBook(id);
+          setFormData(bookData);
+        } catch (error) {
+          alert("해당 도서를 찾을 수 없습니다.");
+          navigate('/main');
+        }
       }
-    }
-  }, [isEdit, id, books, navigate]);
+    };
+    fetchBook();
+  }, [isEdit, id, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +59,7 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
           "Authorization": `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-          prompt: `An illustrated book cover for the topic "${title}"`,
+          prompt: `An illustrated book cover for the book titled "${title}". Book content: "${formData.content}". Create a cover that represents both the title and content.`,
           n: 1,
           size: "256x256"
         })
@@ -93,14 +90,18 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEdit) {
-      onUpdateBook({ ...formData, id: Number(id) });
-    } else {
-      onAddBook(formData); // App.jsx에서 id/createdAt 추가해줌
+    try {
+      if (isEdit) {
+        await updateBook(id, formData);
+      } else {
+        await createBook(formData);
+      }
+      navigate('/main');
+    } catch (error) {
+      alert(isEdit ? "책 수정에 실패했습니다." : "책 등록에 실패했습니다.");
     }
-    navigate('/main');
   };
 
   return (
@@ -147,34 +148,9 @@ function BookForm({ books, onAddBook, onUpdateBook }) {
               />
               <TextField
                 fullWidth
-                label="저자"
-                name="author"
-                value={formData.author}
-                onChange={handleChange}
-                required
-                margin="normal"
-              />
-              <TextField
-                fullWidth
-                select
-                label="카테고리"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-                margin="normal"
-              >
-                {categories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                fullWidth
-                label="설명"
-                name="description"
-                value={formData.description}
+                label="내용"
+                name="content"
+                value={formData.content}
                 onChange={handleChange}
                 multiline
                 rows={4}
