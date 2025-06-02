@@ -9,8 +9,9 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CommentIcon from '@mui/icons-material/Comment';
-import { getBook } from '../api/bookApi';
+import { getBook, deleteBook } from '../api/bookApi';
 import Layout from '../components/Layout';
 
 function BookDetail() {
@@ -31,6 +32,19 @@ function BookDetail() {
     };
     fetchBook();
   }, [id, navigate]);
+
+  const handleDelete = async () => {
+    if (window.confirm('정말로 이 책을 삭제하시겠습니까?')) {
+      try {
+        await deleteBook(id);
+        alert('책이 삭제되었습니다.');
+        navigate('/main');
+      } catch (error) {
+        console.error('책 삭제 실패:', error);
+        alert('책 삭제에 실패했습니다.');
+      }
+    }
+  };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('ko-KR');
@@ -98,6 +112,15 @@ function BookDetail() {
           sx={{ minWidth: '100px' }}
         >
           수정
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={handleDelete}
+          sx={{ minWidth: '100px' }}
+        >
+          삭제
         </Button>
       </Box>
     </Layout>
