@@ -1,4 +1,6 @@
-# 📚 Aivle 4차 미니프로젝트 프론트엔드
+# Aivle_4
+
+# 📚 Aivle 4차 미니프로젝트
 React 기반 도서 리뷰 웹 애플리케이션  
 
 ---
@@ -26,10 +28,4 @@ React 기반 도서 리뷰 웹 애플리케이션
   - React Router  
   - OpenAI API 호출  
 - **스타일링**  
-  - CSS & MUI 컴포넌트  
-- **Backend**
-  - 언어: Java
-  - 프레임워크: Spring Boot
-  - 데이터 베이스 연동: Spring JPA
-  - 기타: Git
----
+  - CSS & MUI 컴포넌트
