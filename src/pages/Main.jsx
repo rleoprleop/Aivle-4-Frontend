@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Container, Grid, Typography, TextField, Button, Box, Pagination
+  Grid,
+  TextField,
+  Button,
+  Box,
+  Pagination
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import Header from "../components/Header";
-import { getBooks } from '../api/bookApi';
 import BookCard from '../components/BookCard';
+import Layout from '../components/Layout';
+import { getBooks } from '../api/bookApi';
 
 const BOOKS_PER_PAGE = 6;
 
-function Main({ books }) {
+function Main() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [books, setBooks] = useState([]);
@@ -41,15 +45,17 @@ function Main({ books }) {
   };
 
   return (
-    <Box sx={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
-      <Header />
-
-      <Container sx={{ mt: 2, width: '1100px', mx: 'auto', }}>
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold", color: "#2e3c50", textAlign: "center", mb: 6 }}>
-          전체 도서 목록
-        </Typography>
-
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4, ml: 5 }}>
+    <Layout>
+      <Box
+        sx={{
+          width: '1200px',
+          margin: '0 auto',
+          paddingTop: '40px',
+          paddingBottom: '40px',
+        }}
+      >
+        {/* 상단 검색 및 버튼 */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
           <TextField
             label="책 제목 검색"
             variant="outlined"
@@ -59,84 +65,61 @@ function Main({ books }) {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            sx={{ flexGrow: 1, maxWidth: '600px' }}
+            sx={{ width: '500px' }}
           />
           <Button
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => navigate('/book/new')}
             size="medium"
-            sx={{
-              ml: 2,
-              mr: 7,
-              whiteSpace: 'nowrap',
-              backgroundColor: "#007baf",
-              '&:hover': { backgroundColor: "#005f87" }
-            }}
+            sx={{ width: '120px', height: '40px' }}
           >
             책 등록
           </Button>
         </Box>
 
-        {/* 카드 영역 */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            minHeight: '500px',
-            backgroundColor: '#ffffff',
-            borderRadius: '8px',
-            px: 1
-          }}
-        >
-          <Box sx={{ width: '960px', mx: 'auto' }}>
-            {paginatedBooks.length > 0 ? (
-              <Grid container spacing={3} justifyContent="flex-start">
-                {paginatedBooks.map((book) => (
-                  <Grid item xs={4} key={book.id}>
-                    <BookCard
-                      book={book}
-                      onClick={() => navigate(`/book/${book.id}`)}
-                    />
-                  </Grid>
-                ))}
+        {/* 책 카드 영역 */}
+        <Grid container spacing={3}>
+          {paginatedBooks.length > 0 ? (
+            paginatedBooks.map((book) => (
+              <Grid item key={book.id} sx={{ width: '380px' }}>
+                <BookCard
+                  book={book}
+                  onClick={() => navigate(`/book/${book.id}`)}
+                />
               </Grid>
-            ) : (
+            ))
+          ) : (
+            <Grid item sx={{ width: '100%' }}>
               <Box
                 sx={{
-                  height: '100%',
-                  width: '100%',
+                  height: '200px',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
               >
-                <Typography variant="body1" color="textSecondary">
-                  검색 결과가 없습니다.
-                </Typography>
+                <p>검색 결과가 없습니다.</p>
               </Box>
-            )}
-          </Box>
-        </Box>
+            </Grid>
+          )}
+        </Grid>
 
-        {totalPages > 0 && (
-          <Box display="flex" justifyContent="center" mt={4}>
+        {/* 페이지네이션 */}
+        {totalPages > 1 && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
             <Pagination
               count={totalPages}
               page={currentPage}
               onChange={handlePageChange}
               color="primary"
               shape="rounded"
-              siblingCount={1}
-              boundaryCount={1}
             />
           </Box>
         )}
-      </Container>
-    </Box>
+      </Box>
+    </Layout>
   );
 }
 
 export default Main;
-
