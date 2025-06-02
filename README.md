@@ -1,21 +1,23 @@
-# 수정 파일  
-src/  
-├── components/  
-│        └─ Header.jsx            # Title 헤더  
-├── pages/  
-│        └─ Home001.jsx           # Home_001  
-├── App.jsx
-├── db.json                   # json-server 테스트용  
+# 📚 Aivle 4차 미니프로젝트 프론트엔드
 
-## db.json 내용 예시  
-{  
-  "books": [  
-    {  
-      "id":0,  
-      "title": "주린이가 가장 알고 싶은 최다질문 TOP 77",  
-      "author" : "XXX",  
-      "category": "경제",  
-      "coverImageUrl": "https://via.placeholder.com/140x140.png?text=Book+1",  
-      "click_count": 24  
-    },  
-}  
+> React 기반 도서 리뷰 웹 애플리케이션  
+> 사용자 댓글 기능과 간편한 UI/UX 제공
+
+
+## 📝 프로젝트 개요
+
+**Aivle 4차 미니프로젝트 프론트엔드**는 React + Vite 기반의 도서 리뷰 웹앱입니다.  
+사용자는 책 정보를 확인하고, 각 도서에 대해 자유롭게 댓글을 작성할 수 있습니다.  
+
+## ✨ 주요 기능
+
+- 📚 도서 추가 및 AI 기반 표지 생성 등록 및 수정
+- 🔍 키워드 기반 도서 검색 기능
+- 💬 댓글 등록 및 조회 기능
+
+
+## 🛠 기술 스택
+
+- **Frontend**: React, Vite
+- **스타일링**: CSS Modules or  MUI
+- 
